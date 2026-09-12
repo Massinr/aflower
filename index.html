@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>I Love You Alae</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 20%, #2a0e14 0%, #1a0509 55%, #0d0206 100%);
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffd76a;
+    opacity: 0;
+    animation: twinkle 3.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.85; transform: scale(1.1); }
+  }
+
+  .headline {
+    margin-top: 8vh;
+    text-align: center;
+    padding: 0 6vw;
+    z-index: 5;
+    animation: fadeDown 1.8s ease-out;
+  }
+
+  @keyframes fadeDown {
+    0% { opacity: 0; transform: translateY(-24px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .headline h1 {
+    font-size: clamp(1.6rem, 6vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #ffd76a, #ff8fa3, #ffd76a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 5s linear infinite;
+    text-shadow: 0 0 30px rgba(255, 143, 163, 0.25);
+    line-height: 1.3;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .heart {
+    display: inline-block;
+    color: #ff4d6d;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  .rose-wrap {
+    position: relative;
+    width: min(80vw, 420px);
+    animation: sway 6s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+  }
+
+  svg { display: block; width: 100%; height: auto; }
+
+  .petal {
+    transform-origin: 0px 0px;
+    animation: bloom 2.6s cubic-bezier(.2,.9,.25,1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes bloom {
+    0% { opacity: 0; transform: scale(0.15) rotate(0deg); }
+    60% { opacity: 1; }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .stem {
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: grow 1.8s ease-out 0.2s forwards;
+  }
+
+  @keyframes grow {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .leaf {
+    opacity: 0;
+    transform-origin: center;
+    animation: leafIn 1s ease-out forwards;
+  }
+
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 50%, #2a0e14 0%, #1a0509 55%, #0d0206 100%);
+    animation: introOut 1.2s ease-in 2.6s forwards;
+  }
+
+  @keyframes introOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  .intro span {
+    display: inline-block;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(1.4rem, 7vw, 2.6rem);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #ffd76a, #ff8fa3, #ffd76a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+    animation: introWord 0.8s ease-out forwards, shimmer 5s linear infinite;
+  }
+
+  .intro span:nth-child(1) { animation-delay: 0.1s, 0s; }
+  .intro span:nth-child(2) { animation-delay: 0.35s, 0s; }
+  .intro span:nth-child(3) { animation-delay: 0.6s, 0s; }
+  .intro span:nth-child(4) { animation-delay: 0.85s, 0s; }
+  .intro span:nth-child(5) { animation-delay: 1.1s, 0s; }
+  .intro span:nth-child(6) { animation-delay: 1.35s, 0s; }
+
+  @keyframes introWord {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .intro .intro-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.5ch;
+    justify-content: center;
+    padding: 0 6vw;
+    text-align: center;
+  }
+
+  .main-content {
+    opacity: 0;
+    animation: fadeIn 1.4s ease-out 2.6s forwards;
+  }
+
+  .footer-note {
+    z-index: 5;
+    padding: 3vh 6vw 4vh;
+    text-align: center;
+    color: #f2c9a0;
+    font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+    letter-spacing: 1px;
+    opacity: 0.85;
+    animation: fadeIn 2.5s ease-out 1.5s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.85; }
+  }
+
+  @keyframes leafIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="intro-row">
+    <span>for</span><span>the</span><span>love</span><span>of</span><span>my</span><span>life</span>
+  </div>
+</div>
+
+<div class="main-content">
+
+<div class="headline">
+  <h1>I love you Alae so much <span class="heart">&#10084;</span></h1>
+</div>
+
+<div class="stage">
+  <div class="rose-wrap">
+    <svg viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff6f91"/>
+          <stop offset="55%" stop-color="#e0304a"/>
+          <stop offset="100%" stop-color="#8f0d24"/>
+        </linearGradient>
+        <linearGradient id="petalGradMid" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff8fa3"/>
+          <stop offset="100%" stop-color="#e0304a"/>
+        </linearGradient>
+        <linearGradient id="petalGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffd3da"/>
+          <stop offset="100%" stop-color="#ff7d95"/>
+        </linearGradient>
+        <linearGradient id="stemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2f6b3a"/>
+          <stop offset="100%" stop-color="#173d20"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffe9a8"/>
+          <stop offset="100%" stop-color="#d9a441"/>
+        </linearGradient>
+      </defs>
+
+      <!-- curved stem, rooted at the very bottom of the screen -->
+      <path class="stem" d="M200,700 C 150,620 252,548 182,468 C 118,394 232,330 200,265" stroke="url(#stemGrad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+      <!-- thorns -->
+      <path d="M196,560 L 176,548 L 198,572 Z" fill="#173d20"/>
+      <path d="M208,400 L 232,392 L 206,416 Z" fill="#173d20"/>
+
+      <!-- leaves -->
+      <path class="leaf" style="animation-delay:1.2s" d="M186,478 C 130,470 95,505 82,548 C 138,550 178,518 186,478 Z" fill="#2f6b3a"/>
+      <path class="leaf" style="animation-delay:1.35s" d="M198,410 C 254,398 292,425 305,468 C 250,475 210,450 198,410 Z" fill="#265c30"/>
+
+      <!-- outer ring: 8 large splayed petals -->
+      <g transform="translate(200,255) rotate(22.5)"><path class="petal" style="animation-delay:1.05s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(67.5)"><path class="petal" style="animation-delay:1.1s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(112.5)"><path class="petal" style="animation-delay:1.15s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(157.5)"><path class="petal" style="animation-delay:1.2s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(202.5)"><path class="petal" style="animation-delay:1.25s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(247.5)"><path class="petal" style="animation-delay:1.3s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(292.5)"><path class="petal" style="animation-delay:1.35s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+      <g transform="translate(200,255) rotate(337.5)"><path class="petal" style="animation-delay:1.4s" d="M0,0 C -23,-19 -27,-64 0,-86 C 27,-64 23,-19 0,0 Z" fill="url(#petalGradLight)"/></g>
+
+      <!-- third ring: 7 medium petals -->
+      <g transform="translate(200,250) rotate(0)"><path class="petal" style="animation-delay:.75s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(51)"><path class="petal" style="animation-delay:.8s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(103)"><path class="petal" style="animation-delay:.85s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(154)"><path class="petal" style="animation-delay:.9s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(206)"><path class="petal" style="animation-delay:.95s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(257)"><path class="petal" style="animation-delay:1s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+      <g transform="translate(200,250) rotate(309)"><path class="petal" style="animation-delay:1.05s" d="M0,0 C -18,-15 -21,-50 0,-68 C 21,-50 18,-15 0,0 Z" fill="url(#petalGradMid)"/></g>
+
+      <!-- second ring: 5 tighter petals -->
+      <g transform="translate(200,244) rotate(18)"><path class="petal" style="animation-delay:.4s" d="M0,0 C -13,-11 -15,-36 0,-50 C 15,-36 13,-11 0,0 Z" fill="url(#petalGrad)"/></g>
+      <g transform="translate(200,244) rotate(90)"><path class="petal" style="animation-delay:.45s" d="M0,0 C -13,-11 -15,-36 0,-50 C 15,-36 13,-11 0,0 Z" fill="url(#petalGrad)"/></g>
+      <g transform="translate(200,244) rotate(162)"><path class="petal" style="animation-delay:.5s" d="M0,0 C -13,-11 -15,-36 0,-50 C 15,-36 13,-11 0,0 Z" fill="url(#petalGrad)"/></g>
+      <g transform="translate(200,244) rotate(234)"><path class="petal" style="animation-delay:.55s" d="M0,0 C -13,-11 -15,-36 0,-50 C 15,-36 13,-11 0,0 Z" fill="url(#petalGrad)"/></g>
+      <g transform="translate(200,244) rotate(306)"><path class="petal" style="animation-delay:.6s" d="M0,0 C -13,-11 -15,-36 0,-50 C 15,-36 13,-11 0,0 Z" fill="url(#petalGrad)"/></g>
+
+      <!-- inner bud: 4 tiny curled petals -->
+      <g transform="translate(200,238) rotate(45)"><path class="petal" style="animation-delay:.1s" d="M0,0 C -9,-8 -10,-26 0,-36 C 10,-26 9,-8 0,0 Z" fill="url(#goldGrad)"/></g>
+      <g transform="translate(200,238) rotate(135)"><path class="petal" style="animation-delay:.15s" d="M0,0 C -9,-8 -10,-26 0,-36 C 10,-26 9,-8 0,0 Z" fill="url(#goldGrad)"/></g>
+      <g transform="translate(200,238) rotate(225)"><path class="petal" style="animation-delay:.2s" d="M0,0 C -9,-8 -10,-26 0,-36 C 10,-26 9,-8 0,0 Z" fill="url(#goldGrad)"/></g>
+      <g transform="translate(200,238) rotate(315)"><path class="petal" style="animation-delay:.25s" d="M0,0 C -9,-8 -10,-26 0,-36 C 10,-26 9,-8 0,0 Z" fill="url(#goldGrad)"/></g>
+    </svg>
+  </div>
+</div>
+
+<div class="footer-note">forever &amp; always, for you</div>
+
+</div>
+
+<script>
+  const sparkleCount = 26;
+  const colors = ['#ffd76a', '#ff8fa3', '#ffb347'];
+  for (let i = 0; i < sparkleCount; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    const size = Math.random() * 3 + 1.5;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 70 + 'vh';
+    s.style.background = colors[Math.floor(Math.random() * colors.length)];
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    s.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+    document.body.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
